@@ -13,15 +13,14 @@ public class cliMainMenu {
         System.out.println("|   MENU SELECTION DEMO    |");
         System.out.println("============================");
         System.out.println("| Options:                 |");
-        System.out.println("|        1. Option 1       |");
-        System.out.println("|        2. Option 2       |");
-        System.out.println("|        3. Exit           |");
+        System.out.println("|       1. Add a new City  |");
+        System.out.println("|       2. List all cities |");
+        System.out.println("|       3. Exit            |");
         System.out.println("============================");
 
         System.out.println(" Select option: ");
 
         int userChoice = input.nextInt();
-        System.out.println(userChoice);
-        return userChoice;
+        return 1;
     }
 }
