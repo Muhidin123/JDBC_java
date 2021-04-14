@@ -84,7 +84,7 @@ public class Main {
             preparedStatementSql.setString(2, state);
             preparedStatementSql.setInt(3,zipCode);
             preparedStatementSql.setString(4, info);
-//            preparedStatementSql.executeUpdate();
+            preparedStatementSql.executeUpdate();
             resultOfQuery = preparedInfo.executeQuery();
 
             while (resultOfQuery.next()) {

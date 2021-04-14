@@ -21,6 +21,6 @@ public class cliMainMenu {
         System.out.println(" Select option: ");
 
         int userChoice = input.nextInt();
-        return 1;
+        return userChoice;
     }
 }
