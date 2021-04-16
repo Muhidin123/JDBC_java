@@ -10,18 +10,8 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-//        List<Integer> array = new ArrayList<>();
-//        array.add(5);
-//        array.add(1);
-//        array.add(22);
-//        array.add(25);
-//        array.add(6);
-//        array.add(-1);
-//        array.add(8);
-//        array.add(10);
 //
-//        List<Integer> sequence = new ArrayList<>();
-//        sequence.add(26);
+        System.out.println(Arrays.toString(solution.bubbleSort(new int[]{8, 5, 2, 9, 5, 6, 3})));
 
 
     }
@@ -300,5 +290,101 @@ public class Solution {
 
 
 
+    public void primes2(long number){
+        for(int i = 2; i< number; i++) {
+            while(number%i == 0) {
+                System.out.println(i+" ");
+                number = number/i;
+            }
+        }
+        if(number >2) {
+            System.out.println(number);
+        }
+    }
+    public long primes(long n)
+    {
+        // Initialize the maximum prime
+        // factor variable with the
+        // lowest one
+        long maxPrime = -1;
 
+        // Print the number of 2s
+        // that divide n
+        while (n % 2 == 0) {
+            maxPrime = 2;
+
+            // equivalent to n /= 2
+            n >>= 1;
+        }
+
+        // n must be odd at this point,
+        // thus skip the even numbers
+        // and iterate only for odd
+        // integers
+        for (int i = 3; i <= Math.sqrt(n); i += 2) {
+            while (n % i == 0) {
+                maxPrime = i;
+                n = n / i;
+            }
+        }
+
+        // This condition is to handle
+        // the case when n is a prime
+        // number greater than 2
+        if (n > 2)
+            maxPrime = n;
+
+        return maxPrime;
+    }
+
+
+    public  int[] findThreeLargestNumbers(int[] array) {
+        int[] threeLargest = {Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE};
+        Solution solution = new Solution();
+
+        for(int num: array) {
+            solution.updateLargest(threeLargest, num);
+        }
+        return threeLargest;
+    }
+
+    public void updateLargest(int[] threeLargest, int num) {
+        if (num > threeLargest[2]) {
+            shiftAndUpdate(threeLargest, num, 2);
+        } else if (num > threeLargest[1]) {
+            shiftAndUpdate(threeLargest, num, 1);
+        } else if(num > threeLargest[0]) {
+            shiftAndUpdate(threeLargest, num, 0);
+        }
+    }
+
+    public void shiftAndUpdate(int[] arr, int num, int idx) {
+
+        for (int i = 0; i <= idx; i++) {
+         if(i == idx) {
+             arr[i] = num;
+         } else {
+             arr[i] = arr[i + 1];
+         }
+        }
+    }
+
+
+
+    public  int[] bubbleSort(int[] array) {
+        int n = array.length;
+
+        int temp = Integer.MIN_VALUE;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < (n - i -1) ; j++) {
+                if(array[j] > array[j + 1]) {
+                    temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j+1] = temp;
+                }
+            }
+        }
+        return array;
+    }
 }
