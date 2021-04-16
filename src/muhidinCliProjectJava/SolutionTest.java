@@ -42,6 +42,16 @@ class SolutionTest {
     }
 
 
+    @Test
+    @DisplayName("Should return 0 for n = 0 or arr.length <= 1")
+    void test4() {
+        assertEquals(1, solution.searchInsert(new int[]{1}, 5));
+        assertEquals(0, solution.searchInsert(new int[]{}, 5));
+        assertEquals(0, solution.searchInsert(new int[]{4}, 2));
+
+    }
+
+
 
 
 
