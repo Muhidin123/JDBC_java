@@ -4,8 +4,6 @@ import java.util.*;
 
 //Input: n = 5
 //Output: [-7,-1,1,3,4]
-//Explanation: These arrays also are accepted [-5,-1,1,2,3] , [-3,-1,2,-2,4].
-
 public class Solution {
 
     public static void main(String[] args) {
@@ -35,17 +33,17 @@ public class Solution {
     }
 
 
-        public int minSteps(int n) {
-            int ans = 0, d = 2;
-            while (n > 1) {
-                while (n % d == 0) {
-                    ans += d;
-                    n /= d;
-                }
-                d++;
+    public int minSteps(int n) {
+        int ans = 0, d = 2;
+        while (n > 1) {
+            while (n % d == 0) {
+                ans += d;
+                n /= d;
             }
-            return ans;
+            d++;
         }
+        return ans;
+    }
 
 
 //    Loop through the array starting from the end.
@@ -55,14 +53,14 @@ public class Solution {
     public int[] replaceElements(int[] arr) {
         int max = -1;
         for (int i = arr.length - 1; i >= 0; i--) {
-                int current = arr[i];
+            int current = arr[i];
 
-                arr[i] = max;
+            arr[i] = max;
 
-                if(current > max) {
-                    max = current;
-                }
+            if(current > max) {
+                max = current;
             }
+        }
         return arr;
     }
 
@@ -361,11 +359,11 @@ public class Solution {
     public void shiftAndUpdate(int[] arr, int num, int idx) {
 
         for (int i = 0; i <= idx; i++) {
-         if(i == idx) {
-             arr[i] = num;
-         } else {
-             arr[i] = arr[i + 1];
-         }
+            if(i == idx) {
+                arr[i] = num;
+            } else {
+                arr[i] = arr[i + 1];
+            }
         }
     }
 
@@ -387,4 +385,26 @@ public class Solution {
         }
         return array;
     }
+
+
+    public static int[] insertionSort(int[] array) {
+        for(int i = 1; i < array.length; i++) {
+            int j = i;
+            while(j > 0 && array[j] < array[j -1]){
+                swap(j, j-1, array);
+                j--;
+            }
+        }
+        return array;
+    }
+
+    private static void swap(int j, int i, int[] array) {
+        int temp = array[j];
+        array[j] = array[i];
+        array[i] = temp;
+
+    }
 }
+}
+
+//Explanation: These arrays also are accepted [-5,-1,1,2,3] , [-3,-1,2,-2,4].
