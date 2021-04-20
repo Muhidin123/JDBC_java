@@ -1,5 +1,7 @@
 package muhidinCliProjectJava;
 
+import org.junit.platform.commons.util.StringUtils;
+
 import java.util.*;
 
 //Input: n = 5
@@ -9,7 +11,7 @@ public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
 //
-        System.out.println(solution.caesarCypherEncryptor("ab", 2));
+        System.out.println(solution.numberOfLetters("aheaolabbhb", "hello"));
 
 
     }
@@ -427,4 +429,79 @@ public class Solution {
     }
 
     //'\u0061' -> "a"
+
+    public String runLengthEncoding(String string) {
+        StringBuilder stringChars = new StringBuilder();
+
+        int currentNumOfLetters = 1;
+
+        for (int i = 1; i < string.length(); i++) {
+            char currentLetter = string.charAt(i);
+            char prevLetter = string.charAt(i - 1);
+
+            if ((currentLetter != prevLetter) || (currentNumOfLetters == 9)) {
+                stringChars.append(currentNumOfLetters);
+                stringChars.append(prevLetter);
+                currentNumOfLetters = 0;
+            }
+            currentNumOfLetters++;
+        }
+
+        stringChars.append(currentNumOfLetters);
+        stringChars.append(string.charAt(string.length() - 1));
+
+        return stringChars.toString();
+    }
+
+    public boolean numberOfLetters(String characters, String document) {
+
+//        You're given a string of available characters and a string representing a
+//        document that you need to generate. Write a function that determines if you
+//        can generate the document using the available characters. If you can generate
+//        the document, your function should return true else false
+//        {
+//            "characters": "Bste!hetsi ogEAxpelrt x ",
+//                "document": "AlgoExpert is the Best!"
+//        }
+        // SHOULD RETURN TRUE
+
+
+        boolean solution = true;
+        int countCharacters = 0, countDocument;
+
+        HashMap<Character, Integer> map = new HashMap<>();
+        HashMap<Character, Integer> mapDocu = new HashMap<>();
+
+        //7
+        for (char character : characters.toCharArray()) {
+            if (map.containsKey(character)) {
+                countCharacters = map.get(character);
+                map.put(character, countCharacters + 1);
+            } else {
+                map.put(character, 1);
+            }
+        }
+
+
+        for (char character: document.toCharArray()){
+            if(mapDocu.containsKey(character)) {
+                countDocument = mapDocu.get(character);
+                mapDocu.put(character, countDocument + 1);
+            } else {
+                mapDocu.put(character, 1);
+            }
+
+        }
+        for (Map.Entry<Character,Integer> set: mapDocu.entrySet()) {
+            Character key = set.getKey();
+            Integer value = set.getValue();
+
+            Integer charsKey = map.get(key);
+
+            if ((charsKey == null) || !((charsKey - value) >= 0)){
+                solution = false;
+            }
+        }
+        return solution;
+    }
 }
