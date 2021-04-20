@@ -11,7 +11,8 @@ public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
 //
-        System.out.println(solution.numberOfLetters("aheaolabbhb", "hello"));
+        int[] coins = {5,2,1,7,50,32,21,10,6,22};
+        System.out.println(solution.nonConstructibleChange(coins));
 
 
     }
@@ -504,4 +505,41 @@ public class Solution {
         }
         return solution;
     }
+
+    public int firstNonRepeatingCharacter(String string) {
+        HashMap<Character, Integer> letterFreq = new HashMap<>();
+        for (int i = 0; i < string.length(); i++) {
+            char currentChar = string.charAt(i);
+
+            letterFreq.put(currentChar, letterFreq.getOrDefault(currentChar, 0) + 1);
+        }
+
+        for (int i = 0; i < string.length(); i++) {
+            Character currentChar =  string.charAt(i);
+
+            if (letterFreq.get(currentChar) == 1){
+                return i;
+            }
+        }
+        return  -1;
+    }
+
+
+    public int nonConstructibleChange(int[] coins) {
+
+        //get minimum not possible change
+        Arrays.sort(coins);
+
+        int currentChange = 0;
+
+        for(int coin: coins) {
+            if(coin > currentChange + 1){
+                return currentChange + 1;
+            }
+            currentChange += coin;
+        }
+
+        return currentChange + 1;
+    }
+
 }
