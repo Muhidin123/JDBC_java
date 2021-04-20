@@ -9,7 +9,7 @@ public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
 //
-        System.out.println(Arrays.toString(solution.bubbleSort(new int[]{8, 5, 2, 9, 5, 6, 3})));
+        System.out.println(solution.caesarCypherEncryptor("ab", 2));
 
 
     }
@@ -271,23 +271,6 @@ public class Solution {
         return squared;
     }
 
-
-//    "competitions": [
-//            ["HTML", "Java"],
-//            ["Java", "Python"],
-//            ["Python", "HTML"],
-//            ["C#", "Python"],
-//            ["Java", "C#"],
-//            ["C#", "HTML"],
-//            ["SQL", "C#"],
-//            ["HTML", "SQL"],
-//            ["SQL", "Python"],
-//            ["SQL", "Java"]
-//            ],
-//            "results": [0, 1, 1, 1, 0, 1, 0, 1, 1, 0]
-
-
-
     public void primes2(long number){
         for(int i = 2; i< number; i++) {
             while(number%i == 0) {
@@ -404,7 +387,44 @@ public class Solution {
         array[i] = temp;
 
     }
-}
-}
+    public  boolean isPalindromeString(String string) {
+        //O(n) space and time
+        StringBuilder stringBuilder = new StringBuilder();
 
-//Explanation: These arrays also are accepted [-5,-1,1,2,3] , [-3,-1,2,-2,4].
+        for (int i = string.length() - 1; i >= 0; i--) {
+            stringBuilder.append(string.charAt(i));
+        }
+        return stringBuilder.toString().equals(string);
+    }
+
+    public boolean isPalindromeString1(String string) {
+        // O(1) space O(n) time
+        int leftPointer = 0;
+        int rightPointer = string.length() - 1;
+
+        while (leftPointer < rightPointer) {
+            if(string.charAt(leftPointer) != string.charAt(rightPointer)){
+                return false;
+            }
+            leftPointer++;
+            rightPointer--;
+        }
+        return true;
+    }
+    public  String caesarCypherEncryptor(String str, int key) {
+        char[] newLetters = new char[str.length()];
+        int newKey = key % 26;
+
+        for (int i = 0; i < str.length(); i++) {
+            newLetters[i] = getNewLetter(str.charAt(i), newKey);
+        }
+        return new String(newLetters);
+    }
+
+    public static char getNewLetter(char letter, int key) {
+        int newLetterCode = letter + key;
+        return newLetterCode <= 122 ? (char) newLetterCode : (char) (96 + newLetterCode % 122);
+    }
+
+    //'\u0061' -> "a"
+}
