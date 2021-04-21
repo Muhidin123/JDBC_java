@@ -1,5 +1,6 @@
 package muhidinCliProjectJava;
 
+import com.sun.source.tree.BinaryTree;
 import org.junit.platform.commons.util.StringUtils;
 
 import java.util.*;
@@ -13,6 +14,20 @@ public class Solution {
 //
         int[] coins = {5,2,1,7,50,32,21,10,6,22};
         System.out.println(solution.nonConstructibleChange(coins));
+
+        BST root = new Solution.BST(10);
+        root.left = new Solution.BST(5);
+        root.left.left = new Solution.BST(2);
+        root.left.left.left = new Solution.BST(1);
+        root.left.right = new Solution.BST(5);
+        root.right = new Solution.BST(15);
+        root.right.left = new Solution.BST(13);
+        root.right.left.right = new Solution.BST(14);
+        root.right.right = new Solution.BST(22);
+
+
+
+        System.out.println(solution.findClosestVal(root, 12));
 
 
     }
@@ -541,5 +556,75 @@ public class Solution {
 
         return currentChange + 1;
     }
+
+
+    //find closest value in binary search tree
+    public  int findClosestVal(BST tree, int target) {
+        return findClosestVal(tree, target, tree.value);
+    }
+
+    public  int findClosestVal(BST tree, int target, int closest){
+        BST currentNode = tree;
+
+        while (currentNode != null) {
+            if (Math.abs(target - closest) > Math.abs(target - currentNode.value)){
+                closest = currentNode.value;
+            }
+            if (target < currentNode.value){
+                currentNode = currentNode.left;
+            } else if (target > currentNode.value){
+                currentNode = currentNode.right;
+            } else {
+                break;
+            }
+        }
+        return closest;
+    }
+
+    static class BST {
+        public int value;
+        public BST left;
+        public BST right;
+
+        public BST(int value) {
+            this.value = value;
+        }
+    }
+
+
+    public static class BinaryTree {
+        int value;
+        BinaryTree left;
+        BinaryTree right;
+
+        BinaryTree(int value) {
+            this.value = value;
+            this.left = null;
+            this.right = null;
+        }
+    }
+
+    public static List<Integer> branchSums(BinaryTree root) {
+
+        ArrayList<Integer> sums = new ArrayList<>();
+        branchSumsHelper(root, 0, sums);
+        return sums;
+    }
+
+    public static void branchSumsHelper(BinaryTree root, int runningSum, ArrayList<Integer> sums){
+     if(root == null) {
+         return;
+     }
+     int newSum = runningSum + root.value;
+     if (root.left == null && root.right == null){
+         sums.add(newSum);
+         return;
+     }
+     branchSumsHelper(root.left, newSum, sums);
+     branchSumsHelper(root.right, newSum, sums);
+
+
+    }
+
 
 }
